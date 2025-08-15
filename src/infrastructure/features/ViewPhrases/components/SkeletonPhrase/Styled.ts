@@ -10,9 +10,9 @@ export const Container = styled.div`
   flex-wrap: wrap;
   align-content: center;
   background-color: #ffffff;
-  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.31);
-  -webkit-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.31);
-  -moz-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.31);
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.15);
 `;
 
 const shimmer = keyframes`
