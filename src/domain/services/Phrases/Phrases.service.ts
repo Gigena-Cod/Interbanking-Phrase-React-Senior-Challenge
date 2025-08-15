@@ -113,8 +113,14 @@ export class PhrasesService {
           results = results.filter((phrase) => regex.test(phrase.text));
         }
 
+        const orderedResults = results.sort((a, b) => {
+          if (a.createdAt > b.createdAt) return -1;
+          if (a.createdAt < b.createdAt) return 1;
+          return 0;
+        });
+
         resolve({
-          data: results,
+          data: orderedResults,
           success: true,
         });
       };
