@@ -12,7 +12,7 @@ export const Container = styled.button<{ $type?: TYPE }>`
   justify-content: center;
   border-radius: 4px;
   height: 2.25rem;
-  width: min-content;
+  width: max-content;
   padding: 0 1rem;
   margin: 0;
 `;
