@@ -1,3 +1,4 @@
+import type { GetParams } from "../../../infrastructure/hooks/Phrases/types";
 import type { Phrase } from "../../models";
 import {
   DB_NAME,
@@ -15,6 +16,10 @@ export class PhrasesService {
     this.initDB();
   }
 
+  /**
+   * Initializes the database
+   * @returns {Promise<void>} A promise that resolves when the database is initialized
+   */
   private initDB(): Promise<void> {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -51,6 +56,12 @@ export class PhrasesService {
     });
   }
 
+  /**
+   * Creates a transaction for the specified store and mode
+   * @param {string} storeName - The name of the store to create a transaction for
+   * @param {IDBTransactionMode} mode - The mode of the transaction (readonly or readwrite)
+   * @returns {IDBObjectStore} The object store for the specified store and mode
+   */
   private transaction(
     storeName: string,
     mode: IDBTransactionMode
@@ -59,6 +70,11 @@ export class PhrasesService {
     return tx.objectStore(storeName);
   }
 
+  /**
+   * Waits for a specified amount of time
+   * @param {number} ms - The amount of time to wait in milliseconds
+   * @returns {Promise<void>} A promise that resolves after the specified amount of time
+   */
   private async withTimeout(ms: number = 1500): Promise<void> {
     await new Promise<void>((resolve) => {
       setTimeout(() => {
@@ -67,9 +83,15 @@ export class PhrasesService {
     });
   }
 
-  async get(): Promise<GetResponse> {
+  /**
+   * Retrieves phrases from the database
+   * @param {GetParams} getParams - Optional parameters for the get operation
+   * @param {string} getParams.search - Optional search parameter to filter phrases
+   * @returns {Promise<GetResponse>} A promise that resolves to the retrieved phrases
+   */
+  async get(getParams?: GetParams): Promise<GetResponse> {
+    const { search } = getParams || {};
     await this.initDB();
-
     await this.withTimeout();
 
     const request = await new Promise<GetResponse>((resolve, reject) => {
@@ -83,8 +105,16 @@ export class PhrasesService {
         });
 
       request.onsuccess = () => {
+        let results = request.result as Phrase[];
+
+        // Filtrado por search usando regex (case-insensitive)
+        if (search && search.trim() !== "") {
+          const regex = new RegExp(search, "i");
+          results = results.filter((phrase) => regex.test(phrase.text));
+        }
+
         resolve({
-          data: request.result as Phrase[],
+          data: results,
           success: true,
         });
       };
@@ -93,6 +123,11 @@ export class PhrasesService {
     return request;
   }
 
+  /**
+   * Creates a new phrase in the database
+   * @param {string} newText - The text of the new phrase
+   * @returns {Promise<PostResponse>} A promise that resolves to the created phrase
+   */
   async post(newText: string): Promise<PostResponse> {
     await this.initDB();
 
@@ -100,7 +135,11 @@ export class PhrasesService {
 
     const request = await new Promise<PostResponse>((resolve, reject) => {
       const store = this.transaction(STORE_NAME, "readwrite");
-      const newPhrase: Phrase = { id: crypto.randomUUID(), text: newText };
+      const newPhrase: Phrase = {
+        id: crypto.randomUUID(),
+        text: newText,
+        createdAt: new Date().toISOString(),
+      };
       const request = store.add(newPhrase);
 
       request.onsuccess = () => {
@@ -120,6 +159,11 @@ export class PhrasesService {
     return request;
   }
 
+  /**
+   * Deletes a phrase from the database
+   * @param {string} id - The ID of the phrase to delete
+   * @returns {Promise<boolean>} A promise that resolves to true if the deletion was successful
+   */
   async delete(id: string): Promise<boolean> {
     await this.initDB();
 
@@ -136,6 +180,10 @@ export class PhrasesService {
     return request;
   }
 
+  /**
+   * Loads default phrases into the database
+   * @returns {Promise<void>} A promise that resolves when the default phrases are loaded
+   */
   private async loadDefaultPhrases(): Promise<void> {
     await Promise.all(
       DEFAULT_PHRASES.map(
