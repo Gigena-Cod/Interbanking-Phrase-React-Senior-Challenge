@@ -19,11 +19,24 @@ export const TitleWrapper = styled.div`
 `;
 
 export const NewPhraseWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   gap: 1rem;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const InputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const PhrasesWrapper = styled.div`
