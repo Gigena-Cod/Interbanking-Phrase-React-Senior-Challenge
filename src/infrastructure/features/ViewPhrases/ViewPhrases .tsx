@@ -22,6 +22,7 @@ import { setCreatePhrasePopupOpen, setPhrases } from "../../redux/Phrases";
 import { useSelector } from "react-redux";
 import { getPhrases } from "../../redux/Phrases/actions";
 import { TYPE } from "../../components/Button/types";
+import { DeletePhrasePopup } from "./components/DeletePhrasePopup/DeletePhrasePopup";
 
 const MINIMUM_PHRASES = 0;
 
@@ -124,12 +125,14 @@ export function ViewPhrases() {
           phrases.map((phrase) => (
             <Phrase
               key={phrase.id}
+              id={phrase.id}
               text={phrase.text}
               createdAt={phrase.createdAt}
             />
           ))}
       </PhrasesWrapper>
       <CreatePhrasePopup />
+      <DeletePhrasePopup />
     </Container>
   );
 }

@@ -9,12 +9,23 @@ const phrasesSlice = createSlice({
     setPhrases(state, action: PayloadAction<Phrase[]>) {
       state.phrases = action.payload;
     },
+    setSelectedPhrase(state, action: PayloadAction<Phrase | null>) {
+      state.selectedPhrase = action.payload;
+    },
     setCreatePhrasePopupOpen(state, action: PayloadAction<boolean>) {
       state.createPhrasePopupOpen = action.payload;
+    },
+    setDeletePhrasePopupOpen(state, action: PayloadAction<boolean>) {
+      state.deletePhrasePopupOpen = action.payload;
     },
   },
 });
 
-export const { setPhrases, setCreatePhrasePopupOpen } = phrasesSlice.actions;
+export const {
+  setPhrases,
+  setSelectedPhrase,
+  setCreatePhrasePopupOpen,
+  setDeletePhrasePopupOpen,
+} = phrasesSlice.actions;
 
 export default phrasesSlice.reducer;

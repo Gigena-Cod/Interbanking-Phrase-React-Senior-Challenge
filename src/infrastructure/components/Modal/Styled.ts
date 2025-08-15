@@ -14,12 +14,12 @@ export const Container = styled.div`
   bottom: 0;
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.div<{ $height?: string }>`
   background-color: #fff;
   padding: 1rem;
   border-radius: 0.5rem;
   width: 28rem;
-  height: 20rem;
+  height: ${props => props.$height || "20rem"};
   overflow: hidden;
   display: flex;
   flex-direction: column;

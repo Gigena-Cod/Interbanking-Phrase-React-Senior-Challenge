@@ -14,6 +14,9 @@ export const notifySuccess = (message: string) =>
     draggable: true,
     progress: undefined,
     theme: "colored",
+    style: {
+      backgroundColor: "#1E87F0",
+    },
   });
 
 /**
@@ -30,4 +33,7 @@ export const notifyFailure = (message: string) =>
     draggable: true,
     progress: undefined,
     theme: "colored",
+    style: {
+      backgroundColor: "#F74658",
+    },
   });

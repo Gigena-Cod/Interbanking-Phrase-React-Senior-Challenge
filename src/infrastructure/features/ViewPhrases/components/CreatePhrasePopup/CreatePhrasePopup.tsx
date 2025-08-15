@@ -4,7 +4,7 @@ import {
   notifySuccess,
   TextArea,
 } from "../../../../components";
-import { useEffect, useState, type JSX } from "react";
+import { useEffect, useMemo, useState, type JSX } from "react";
 import { Container } from "./Styled";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -32,6 +32,12 @@ export function CreatePhrasePopup(): JSX.Element {
   const dispatch = useDispatch();
 
   const createPhrases = useCreatePhrases();
+
+  const primaryButtonTitle = useMemo(() => {
+    if (createPhrases.loading) return "Saving...";
+
+    return "Save";
+  }, [createPhrases.loading]);
 
   const onClose = () => {
     dispatch(setCreatePhrasePopupOpen(false));
@@ -66,10 +72,13 @@ export function CreatePhrasePopup(): JSX.Element {
       isOpen={isOpen}
       title="Create a New Phrase"
       description="Write an inspiring, funny, or thoughtful phrase to add to your collection."
-      primaryButtonTitle="Save"
+      primaryButtonTitle={primaryButtonTitle}
+      primaryButtonDisabled={createPhrases.loading}
       secondaryButtonTitle="Cancel"
+      secondaryButtonDisabled={createPhrases.loading}
       onPrimaryButtonClick={handleSave}
       onSecondaryButtonClick={onClose}
+
       children={
         <Container>
           <TextArea

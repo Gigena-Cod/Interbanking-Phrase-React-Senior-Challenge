@@ -5,6 +5,9 @@ export interface ModalProps {
     children: React.ReactNode;
     primaryButtonTitle: string;
     secondaryButtonTitle: string;
+    primaryButtonDisabled?: boolean;
+    secondaryButtonDisabled?: boolean;
+    height?: string;
     onPrimaryButtonClick: () => void;
     onSecondaryButtonClick: () => void;
 }

@@ -1,7 +1,11 @@
 export interface GetParams {
-    search?: string;
+  search?: string;
 }
 
 export interface CreateParams {
-    text: string;
+  text: string;
+}
+
+export interface DeleteParams {
+  phraseId: string;
 }

@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -13,7 +13,10 @@ export const Container = styled.div`
   -moz-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.15);
 `;
 
-export const DateWrapper = styled.div`
+export const DateDeleteWrapper = styled.div`
   display: flex;
   margin-top: auto;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;

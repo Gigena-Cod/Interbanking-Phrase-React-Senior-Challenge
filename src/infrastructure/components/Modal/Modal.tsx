@@ -28,9 +28,12 @@ export function Modal(modalProps: ModalProps) {
     isOpen,
     title,
     description,
+    height,
     children,
     primaryButtonTitle,
     secondaryButtonTitle,
+    primaryButtonDisabled,
+    secondaryButtonDisabled,
     onPrimaryButtonClick,
     onSecondaryButtonClick,
   } = modalProps;
@@ -38,7 +41,7 @@ export function Modal(modalProps: ModalProps) {
   return (
     isOpen && (
       <Container>
-        <ModalContent>
+        <ModalContent $height={height}>
           <ModalHeader>
             <Text
               value={title}
@@ -52,11 +55,13 @@ export function Modal(modalProps: ModalProps) {
             <Button
               title={secondaryButtonTitle}
               onClick={onSecondaryButtonClick}
+              disabled={secondaryButtonDisabled}
             />
             <Button
               title={primaryButtonTitle}
               onClick={onPrimaryButtonClick}
               type={TYPE.PRIMARY}
+              disabled={primaryButtonDisabled}
             />
           </ModalFooter>
         </ModalContent>
