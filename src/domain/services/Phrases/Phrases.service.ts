@@ -196,11 +196,12 @@ export class PhrasesService {
         (phrase) =>
           new Promise<void>((resolve, reject) => {
             const store = this.transaction(STORE_NAME, "readwrite");
-            const request = store.add(phrase);
+            const request = store.put(phrase); // <-- put en vez de add
             request.onsuccess = () => resolve();
             request.onerror = () => reject(request.error);
           })
       )
     );
   }
+  
 }
