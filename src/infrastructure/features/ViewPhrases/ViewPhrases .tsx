@@ -11,7 +11,7 @@ import {
   Separator,
   TitleWrapper,
 } from "./Styled";
-import { Text, Button } from "../../components";
+import { Text, Button, notifyFailure } from "../../components";
 import { FONT_SIZE, FONT_WEIGHT } from "../../components/Text/types";
 import { useGetPhrases } from "../../hooks";
 import { CreatePhrasePopup } from "./components/CreatePhrasePopup/CreatePhrasePopup";
@@ -80,7 +80,7 @@ export function ViewPhrases() {
   useEffect(() => {
     if (!getPhrasesHook.error) return;
 
-    console.log(getPhrasesHook.error);
+    notifyFailure("Failed to fetch phrases");
   }, [getPhrasesHook.error]);
 
   return (
