@@ -10,11 +10,11 @@ export function formatRelativeDate(dateString: string): string {
   const hours = Math.floor(diff / (1000 * 60 * 60));
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
-  if (minutes < 1) return "Justo ahora";
-  if (minutes < 60) return `Hace ${minutes} minuto${minutes > 1 ? "s" : ""}`;
-  if (hours < 24) return `Hace ${hours} hora${hours > 1 ? "s" : ""}`;
-  if (days === 1) return "Ayer";
-  if (days < 7) return `Hace ${days} día${days > 1 ? "s" : ""}`;
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+  if (hours < 24) return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  if (days === 1) return "Yesterday";
+  if (days < 7) return `${days} day${days > 1 ? "s" : ""} ago`;
 
   // Para fechas más antiguas, mostrar en formato dd/mm/yyyy
   const day = String(date.getUTCDate()).padStart(2, "0");
