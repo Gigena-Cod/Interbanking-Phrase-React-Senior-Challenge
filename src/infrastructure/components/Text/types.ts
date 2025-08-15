@@ -6,6 +6,7 @@ export interface TextProps {
 }
 
 export enum FONT_SIZE {
+  TEXT_XS = "text-xs",
   TEXT_SM = "text-sm",
   TEXT_BASE = "text-base",
   TEXT_LG = "text-lg",

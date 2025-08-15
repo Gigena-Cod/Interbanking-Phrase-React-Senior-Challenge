@@ -6,7 +6,7 @@ export const Container = styled.textarea<{
 }>`
   width: ${(props) => props.$width || "100%"};
   min-height: ${(props) => props.$minHeight || "100%"};
-  border: 1px solid #444444;
+  border: 1px solid rgb(199, 199, 199);
   outline: none;
   border-radius: 4px;
   resize: none;

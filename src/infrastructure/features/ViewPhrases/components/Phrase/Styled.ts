@@ -1,13 +1,19 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
- display: flex;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  border: 1px solid rgb(134, 134, 134);
   padding: 1rem;
-  height: 6rem;
   border-radius: 0.5rem;
   gap: 1rem;
-  flex-wrap: wrap;
-  align-content: center
+  background-color: #ffffff;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.15);
+`;
+
+export const DateWrapper = styled.div`
+  display: flex;
+  margin-top: auto;
 `;

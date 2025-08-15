@@ -8,6 +8,7 @@ import {
   InputWrapper,
   NewPhraseWrapper,
   PhrasesWrapper,
+  Separator,
   TitleWrapper,
 } from "./Styled";
 import { Text, Button } from "../../components";
@@ -20,6 +21,7 @@ import { Phrase } from "./components/Phrase/Phrase";
 import { setCreatePhrasePopupOpen, setPhrases } from "../../redux/Phrases";
 import { useSelector } from "react-redux";
 import { getPhrases } from "../../redux/Phrases/actions";
+import { TYPE } from "../../components/Button/types";
 
 const MINIMUM_PHRASES = 0;
 
@@ -84,25 +86,31 @@ export function ViewPhrases() {
     <Container>
       <TitleWrapper>
         <Text
-          value="ViewPhrases"
+          value="Phrases manager"
           fontSize={FONT_SIZE.TEXT_2XL}
           fontWeight={FONT_WEIGHT.FONT_BOLD}
         />
         <Text
-          value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          value="Create, view, and manage your favorite phrases in one place. Search through your collection instantly and keep your most inspiring thoughts always at hand"
           fontSize={FONT_SIZE.TEXT_SM}
         />
       </TitleWrapper>
+      <Separator />
       <NewPhraseWrapper>
         <InputWrapper>
           <InputText
             value={search}
+            width="20rem"
             placeholder="Write your phrase here..."
             onChange={handleSearchChange}
           />
         </InputWrapper>
         <ButtonWrapper>
-          <Button title="Add phrase" onClick={handleCreatePhrasePopupOpen} />
+          <Button
+            title="Add phrase"
+            onClick={handleCreatePhrasePopupOpen}
+            type={TYPE.PRIMARY}
+          />
         </ButtonWrapper>
       </NewPhraseWrapper>
 
@@ -114,7 +122,11 @@ export function ViewPhrases() {
 
         {displayPhrases &&
           phrases.map((phrase) => (
-            <Phrase key={phrase.id} text={phrase.text} />
+            <Phrase
+              key={phrase.id}
+              text={phrase.text}
+              createdAt={phrase.createdAt}
+            />
           ))}
       </PhrasesWrapper>
       <CreatePhrasePopup />
