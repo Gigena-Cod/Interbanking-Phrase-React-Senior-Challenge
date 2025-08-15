@@ -1,23 +1,74 @@
-import { Modal, Text, TextArea } from "../../../../components";
-import { useState } from "react";
+import {
+  Modal,
+  notifyFailure,
+  notifySuccess,
+  TextArea,
+} from "../../../../components";
+import { useEffect, useState, type JSX } from "react";
 import { Container } from "./Styled";
-import type { CreatePhrasePopupProps } from "./types";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  getCreatePhrasePopupOpen,
+  getPhrases,
+} from "../../../../redux/Phrases/actions";
+import {
+  setCreatePhrasePopupOpen,
+  setPhrases,
+} from "../../../../redux/Phrases";
+import { useCreatePhrases } from "../../../../hooks";
 
-export function CreatePhrasePopup(
-  createPhrasePopupProps: CreatePhrasePopupProps
-) {
-  const { isOpen, onClose } = createPhrasePopupProps;
-
+/**
+ * A component that allows users to create new phrases
+ * @returns {JSX.Element} The CreatePhrasePopup component
+ */
+export function CreatePhrasePopup(): JSX.Element {
   const [newPhrase, setNewPhrase] = useState("");
+
+  const isOpen = useSelector(getCreatePhrasePopupOpen);
+
+  const phrases = useSelector(getPhrases);
+
+  const dispatch = useDispatch();
+
+  const createPhrases = useCreatePhrases();
+
+  const onClose = () => {
+    dispatch(setCreatePhrasePopupOpen(false));
+  };
+
+  const handleSave = () => {
+    createPhrases.create({ text: newPhrase });
+  };
+
+  useEffect(() => {
+    if (!createPhrases.data) return;
+
+    notifySuccess("Phrase created successfully");
+
+    const updatedPhrases = [createPhrases.data.data, ...phrases];
+
+    dispatch(setPhrases(updatedPhrases));
+
+    setNewPhrase("");
+
+    onClose();
+  }, [createPhrases.data]);
+
+  useEffect(() => {
+    if (!createPhrases.error) return;
+
+    notifyFailure("Failed to create phrase");
+  }, [createPhrases.error]);
 
   return (
     <Modal
       isOpen={isOpen}
-      title="Lorem ipsum dolor sit amet"
-      description="Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.rure dolor it anim id est laborum."
-      primaryButtonTitle="Close"
+      title="Create a New Phrase"
+      description="Write an inspiring, funny, or thoughtful phrase to add to your collection."
+      primaryButtonTitle="Save"
       secondaryButtonTitle="Cancel"
-      onPrimaryButtonClick={onClose}
+      onPrimaryButtonClick={handleSave}
       onSecondaryButtonClick={onClose}
       children={
         <Container>
