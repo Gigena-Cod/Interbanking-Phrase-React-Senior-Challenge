@@ -1,69 +1,114 @@
-# React + TypeScript + Vite
+# � Gestor de Frases - Challenge Técnico
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación desarrollada en **React + TypeScript** que permite gestionar frases inspiradoras. Incluye funcionalidades CRUD completas con búsqueda en tiempo real, manejo de estado global con Redux, y una interfaz de usuario intuitiva.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Funcionalidades principales
 
-## Expanding the ESLint configuration
+- **Agregar frases**
+  Modal para ingresar una nueva frase, con validación y notificación al usuario.
+- **Visualizar frases en cards**
+  Las frases se muestran en una cuadrícula (matriz) con diseño responsive.
+- **Búsqueda en tiempo real**
+  Filtra dinámicamente las frases mientras el usuario escribe en el buscador.
+- **Eliminar frases**
+  Botón para borrar cualquier frase de la lista con confirmación visual.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Stack Tecnológico
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Frontend
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **React 18** con TypeScript
+- **Vite** como bundler y herramienta de desarrollo
+- **Redux Toolkit** para gestión de estado global
+- **Styled Components** para estilos
+- **React Toastify** para notificaciones
+
+### Herramientas y Utilidades
+
+- **IndexedDB** para almacenamiento local
+- **ESLint** + **Prettier** para calidad de código
+
+### Características Principales
+
+- Arquitectura escalable siguiendo principios SOLID y Clean Code
+- Tipado estático con TypeScript
+- Manejo de errores robusto
+- Código modular y reutilizable
+- Diseño responsive
+- Optimización de rendimiento con memoización
+
+---
+
+## 📂 Estructura del Proyecto
+
+```
+src/
+├── domain/            # Lógica de negocio y modelos
+│   ├── models/        # Interfaces y tipos
+│   └── services/      # Servicios y lógica de negocio
+│
+├── infrastructure/    # Implementación de la infraestructura
+│   ├── components/    # Componentes UI reutilizables
+│   ├── features/      # Características de la aplicación
+│   ├── helpers/       # Utilidades y helpers
+│   └── redux/         # Configuración de Redux
+│
+└── App.tsx            # Componente raíz de la aplicación
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Instalación y Uso
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **Clonar el repositorio**
+
+   ```bash
+   git clone https://github.com/tu-usuario/interbanking-phrase-challenge.git
+   cd interbanking-phrase-challenge
+   ```
+
+2. **Instalar dependencias**
+
+   ```bash
+   npm install
+   # o
+   yarn
+   ```
+
+3. **Iniciar servidor de desarrollo**
+
+   ```bash
+   npm run dev
+   # o
+   yarn dev
+   ```
+
+4. **Construir para producción**
+   ```bash
+   npm run build
+   # o
+   yarn build
+   ```
+
+---
+
+## � Notas Adicionales
+
+- El proyecto utiliza IndexedDB para persistencia local de datos
+- Incluye configuración de ESLint y Prettier para mantener consistencia de código
+- Documentación de componentes con JSDoc
+- Estructura escalable siguiendo DDD (Domain-Driven Design)
+
+---
+
+## 📄 Licencia
+
+Este proyecto fue desarrollado como parte de un challenge técnico y su código fuente es privado.
+
+---
+
+ℹ️ Para más información sobre la arquitectura o decisiones técnicas, consultar la documentación técnica adjunta.
